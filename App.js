@@ -14,8 +14,8 @@ import {
 } from '@react-navigation/stack';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { SCREENS } from './src/navigation';
-import { moderateScale } from './src/utils/scaling';
+import { SCREENS } from './src/view-layer/navigation';
+import { moderateScale } from './src/view-layer/utils/scaling';
 import { ThemeProvider } from 'styled-components';
 
 const SCREEN_NAMES = Object.keys(SCREENS);
