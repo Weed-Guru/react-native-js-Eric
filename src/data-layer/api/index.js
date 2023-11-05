@@ -1,6 +1,19 @@
-export const fetchArticles = async () => {
-    const res = await fetch(`https://newsapi.org/v2/everything?q=Apple&from=2023-11-01&sortBy=popularity&apiKey=a1751ac6082e42acbc227fda84453483`)
+export const fetchArticles = async (source, keyword, page, pageSize) => {
+    let res;
+    if (source === 'all') {
+        if (keyword === '') {
+            res = await fetch(`https://newsapi.org/v2/everything?q=a&page=${page}&pagesize=${pageSize}&apiKey=985fbed48e744fcba6fc1364621bff53`)
+        } else {
+            res = await fetch(`https://newsapi.org/v2/everything?q=${keyword}&page=${page}&pagesize=${pageSize}&apiKey=985fbed48e744fcba6fc1364621bff53`)
+        }
+    } else {
+        if (keyword === '') {
+            res = await fetch(`https://newsapi.org/v2/everything?sources=${source}&q=a&page=${page}&pagesize=${pageSize}&apiKey=985fbed48e744fcba6fc1364621bff53`)
+        } else {
+            res = await fetch(`https://newsapi.org/v2/everything?sources=${source}&q=${keyword}&page=${page}&pagesize=${pageSize}&apiKey=985fbed48e744fcba6fc1364621bff53`)
+        }
+    }
+
     const data = await res.json()
-    console.log(data)
-    return data.articles
+    return data
 }

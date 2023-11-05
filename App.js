@@ -17,9 +17,10 @@ import * as SplashScreen from 'expo-splash-screen';
 import { SCREENS } from './src/view-layer/navigation';
 import { moderateScale } from './src/view-layer/utils/scaling';
 import { ThemeProvider } from 'styled-components';
+import { ToastProvider } from 'react-native-toast-notifications'
+import { ArticleProvider } from './src/view-layer/contexts/ArticleContext';
 
 const SCREEN_NAMES = Object.keys(SCREENS);
-console.log(SCREENS)
 
 const Stack = createStackNavigator();
 
@@ -110,15 +111,19 @@ const theme = {
     secondary: '#636D77',
     tertiary: '#364356',
   },
-  fonts: configureFonts({config: fontConfig, isV3: true}),
+  fonts: configureFonts({ config: fontConfig, isV3: true }),
 }
 
-const Providers = ({children}) => {
+const Providers = ({ children }) => {
   return (
-    <PaperProvider theme={theme}>
-      <ThemeProvider theme={theme}>
-        <>{children}</>
-      </ThemeProvider>
-    </PaperProvider>
+    <ArticleProvider>
+      <PaperProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+          <ToastProvider>
+            <>{children}</>
+          </ToastProvider>
+        </ThemeProvider>
+      </PaperProvider>
+    </ArticleProvider>
   );
 };

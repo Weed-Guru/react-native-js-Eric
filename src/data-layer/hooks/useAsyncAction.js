@@ -3,18 +3,18 @@ import { useCallback, useReducer } from "react";
 function buildReducer() {
   return (state, action) => {
     switch (action.type) {
-      case LoadingStateActionType.Loading:
+      case 'LOADING':
         return {
           loading: true,
           success: false,
         };
-      case LoadingStateActionType.Success:
+      case 'SUCESS':
         return {
           loading: false,
           success: true,
           data: action.data,
         };
-      case LoadingStateActionType.Error:
+      case 'ERROR':
         return {
           loading: false,
           success: false,
@@ -39,11 +39,11 @@ export default function useAsyncAction(
   const [state, dispatch] = useReducer(buildReducer(), initialState);
   const action = useCallback(
     async (...args) => {
-      dispatch({ type: LoadingStateActionType.Loading });
+      dispatch({ type: 'LOADING' });
 
       try {
         const data = await func(...args);
-        dispatch({ type: LoadingStateActionType.Success, data });
+        dispatch({ type: 'SUCESS', data });
 
         if (onSuccess) {
           onSuccess(data, args);
@@ -51,7 +51,7 @@ export default function useAsyncAction(
 
         return data;
       } catch (err) {
-        dispatch({ type: LoadingStateActionType.Error, error: err });
+        dispatch({ type: 'ERROR', error: err });
 
         if (onError) {
           onError(err);
