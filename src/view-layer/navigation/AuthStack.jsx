@@ -11,8 +11,8 @@ const AuthStackNavigator = () => {
         headerShown: false,
         animationEnabled: true,
       }}>
-      <AuthStack.Screen name="NewsList" component={NewsList}/>
-      <AuthStack.Screen name="NewsDetail" component={NewsDetail}/>
+      <AuthStack.Screen name="NewsList" component={NewsList} />
+      <AuthStack.Screen name="NewsDetail" component={NewsDetail} />
     </AuthStack.Navigator>
   )
 }
